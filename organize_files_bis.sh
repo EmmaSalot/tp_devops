@@ -1,56 +1,62 @@
 #!/bin/bash
 
-mkdir -p personnages/mascottes personnages/super\ heros/femmes/cape personnages/super\ heros/femmes/sans\ cape personnages/super\ heros/hommes/cape personnages/super\ heros/hommes/sans\ cap
+if [ -z "$1" ]; then
+    echo "Usage: $0 <home_directory>"
+    exit 1
+fi
 
-chmod 755 personnages
-chmod 775 personnages/mascottes
-chmod 755 personnages/super\ heros
-chmod 755 personnages/super\ heros/femmes
-chmod 775 personnages/super\ heros/femmes/cape
-chmod 775 personnages/super\ heros/femmes/sans\ cape
-chmod 775 personnages/super\ heros/hommes/cape
-chmod 775 personnages/super\ heros/hommes/sans\ cap
+HOME_DIR=$1
 
-touch personnages/mascottes/beastie personnages/mascottes/bibendum personnages/mascottes/mario personnages/mascottes/sonic
-chmod 644 personnages/mascottes/beastie personnages/mascottes/bibendum personnages/mascottes/mario personnages/mascottes/sonic
+mkdir -p "$HOME_DIR/personnages/mascottes" "$HOME_DIR/personnages/comics/femmes/cape" "$HOME_DIR/personnages/comics/femmes/sans cape" "$HOME_DIR/personnages/comics/hommes/cape" "$HOME_DIR/personnages/comics/hommes/sans cap"
 
-mkdir -p personnages/super\ heros/femmes/cape/batgirl personnages/super\ heros/femmes/cape/wonderwoman
-chmod 775 personnages/super\ heros/femmes/cape/batgirl personnages/super\ heros/femmes/cape/wonderwoman
+chmod 755 "$HOME_DIR/personnages"
+chmod 775 "$HOME_DIR/personnages/mascottes"
+chmod 755 "$HOME_DIR/personnages/comics"
+chmod 755 "$HOME_DIR/personnages/comics/femmes"
+chmod 775 "$HOME_DIR/personnages/comics/femmes/cape"
+chmod 775 "$HOME_DIR/personnages/comics/femmes/sans cape"
+chmod 775 "$HOME_DIR/personnages/comics/hommes/cape"
+chmod 775 "$HOME_DIR/personnages/comics/hommes/sans cap"
 
-mkdir -p personnages/super\ heros/femmes/sans\ cape/electra personnages/super\ heros/femmes/sans\ cape/superwoman
-chmod 775 personnages/super\ heros/femmes/sans\ cape/electra personnages/super\ heros/femmes/sans\ cape/superwoman
+touch "$HOME_DIR/personnages/mascottes/beastie" "$HOME_DIR/personnages/mascottes/bibendum" "$HOME_DIR/personnages/mascottes/mario" "$HOME_DIR/personnages/mascottes/sonic"
+chmod 644 "$HOME_DIR/personnages/mascottes/beastie" "$HOME_DIR/personnages/mascottes/bibendum" "$HOME_DIR/personnages/mascottes/mario" "$HOME_DIR/personnages/mascottes/sonic"
 
-touch personnages/super\ heros/hommes/cape/batman personnages/super\ heros/hommes/cape/superman personnages/super\ heros/hommes/cape/thor
-chmod 644 personnages/super\ heros/hommes/cape/batman personnages/super\ heros/hommes/cape/superman personnages/super\ heros/hommes/cape/thor
+mkdir -p "$HOME_DIR/personnages/comics/femmes/cape/batgirl" "$HOME_DIR/personnages/comics/femmes/cape/wonderwoman"
+chmod 775 "$HOME_DIR/personnages/comics/femmes/cape/batgirl" "$HOME_DIR/personnages/comics/femmes/cape/wonderwoman"
 
-touch personnages/super\ heros/hommes/sans\ cap/antman personnages/super\ heros/hommes/sans\ cap/daredevil personnages/super\ heros/hommes/sans\ cap/linuxman personnages/super\ heros/hommes/sans\ cap/spiderman
-chmod 644 personnages/super\ heros/hommes/sans\ cap/antman personnages/super\ heros/hommes/sans\ cap/daredevil personnages/super\ heros/hommes/sans\ cap/linuxman personnages/super\ heros/hommes/sans\ cap/spiderman
+mkdir -p "$HOME_DIR/personnages/comics/femmes/sans cape/electra" "$HOME_DIR/personnages/comics/femmes/sans cape/superwoman"
+chmod 775 "$HOME_DIR/personnages/comics/femmes/sans cape/electra" "$HOME_DIR/personnages/comics/femmes/sans cape/superwoman"
 
-mv personnages/super\ heros/hommes/sans\ cap/linuxman personnages/mascottes/tux
+touch "$HOME_DIR/personnages/comics/hommes/cape/batman" "$HOME_DIR/personnages/comics/hommes/cape/superman" "$HOME_DIR/personnages/comics/hommes/cape/thor"
+chmod 644 "$HOME_DIR/personnages/comics/hommes/cape/batman" "$HOME_DIR/personnages/comics/hommes/cape/superman" "$HOME_DIR/personnages/comics/hommes/cape/thor"
 
-mv personnages/super\ heros personnages/comics
+touch "$HOME_DIR/personnages/comics/hommes/sans cap/antman" "$HOME_DIR/personnages/comics/hommes/sans cap/daredevil" "$HOME_DIR/personnages/comics/hommes/sans cap/linuxman" "$HOME_DIR/personnages/comics/hommes/sans cap/spiderman"
+chmod 644 "$HOME_DIR/personnages/comics/hommes/sans cap/antman" "$HOME_DIR/personnages/comics/hommes/sans cap/daredevil" "$HOME_DIR/personnages/comics/hommes/sans cap/linuxman" "$HOME_DIR/personnages/comics/hommes/sans cap/spiderman"
 
-echo "Bruce Wayne hides behind this character" > personnages/comics/hommes/cape/batman
-echo "he lives in Gotham" >> personnages/comics/hommes/cape/batman
+mv "$HOME_DIR/personnages/comics/hommes/sans cap/linuxman" "$HOME_DIR/personnages/mascottes/tux"
 
-echo "Homer Simpson hides behind this character" > personnages/comics/hommes/sans\ cap/daredevil
-echo "daredevil is a blind comic character" > personnages/comics/hommes/sans\ cap/daredevil
+mv "$HOME_DIR/personnages/super heros" "$HOME_DIR/personnages/comics"
 
-cat personnages/comics/hommes/cape/batman personnages/comics/hommes/sans\ cap/daredevil > personnages/mascottes/mixdarbat
+echo "Bruce Wayne hides behind this character" > "$HOME_DIR/personnages/comics/hommes/cape/batman"
+echo "he lives in Gotham" >> "$HOME_DIR/personnages/comics/hommes/cape/batman"
 
-sudo su
+echo "Homer Simpson hides behind this character" > "$HOME_DIR/personnages/comics/hommes/sans cap/daredevil"
 
-useradd fanboy
+echo "daredevil is a blind comic character" > "$HOME_DIR/personnages/comics/hommes/sans cap/daredevil"
 
-cp -r personnages /home/fanboy
+cat "$HOME_DIR/personnages/comics/hommes/cape/batman" "$HOME_DIR/personnages/comics/hommes/sans cap/daredevil" > "$HOME_DIR/personnages/mascottes/mixdarbat"
 
-chown -R fanboy:fanboy /home/fanboy/personnages
+sudo useradd -m fanboy
 
-ln -s /home/fanboy/personnages /home/fanboy/persofanboy
-ln -s /home/yourname/personnages /home/yourname/perso_yourname
+sudo cp -r "$HOME_DIR/personnages" /home/fanboy
 
-ls -R /home/fanboy/personnages > 14.txt
+sudo chown -R fanboy:fanboy /home/fanboy/personnages
 
-grep -v "total" 14.txt > 15.txt
+sudo ln -s /home/fanboy/personnages /home/fanboy/persofanboy
+sudo ln -s "$HOME_DIR/personnages" /home/yourname/perso_yourname
 
-history | grep -v "cd" | tail -n 250 > myhistory
+sudo ls -R /home/fanboy/personnages > "$HOME_DIR/14.txt"
+
+grep -v "total" "$HOME_DIR/14.txt" > "$HOME_DIR/15.txt"
+
+history | grep -v "cd" | tail -n 250 > "$HOME_DIR/myhistory"
